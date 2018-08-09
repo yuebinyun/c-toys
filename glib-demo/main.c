@@ -1,9 +1,7 @@
 #include <stdio.h>
 #include <glib.h>
+#include "debug.h"
 
-
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wunused-result"
 int main() {
     GList *list = NULL;
 
@@ -11,11 +9,17 @@ int main() {
     printf("The first item is %s\n", (char *) g_list_first(list)->data);
     printf("The length of list is %d\n", g_list_length(list));
 
-    g_list_append(list, "Good Morning!");
+    list = g_list_append(list, "Good Morning!");
     printf("The length of list is %d\n", g_list_length(list));
     printf("The last item is %s\n", (char *) g_list_last(list)->data);
 
+    list = g_list_insert(list, "你好！", 0);
+    printf("The length of list is %d\n", g_list_length(list));
+    printf("The first item is %s\n", (char *) g_list_first(list)->data);
+
     g_list_free(list);
+
+    janus_log_level = 3;
+    JANUS_LOG(LOG_WARN, "debug : %s", "hello");
     return 0;
 }
-#pragma clang diagnostic pop
