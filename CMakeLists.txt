@@ -1,0 +1,15 @@
+cmake_minimum_required(VERSION 3.13)
+project(toys VERSION 0.0.1)
+
+message(STATUS "C compiler:     ${CMAKE_C_COMPILER}")
+message(STATUS "C++ compiler:   ${CMAKE_CXX_COMPILER}")
+message(STATUS "Source dir:     ${PROJECT_SOURCE_DIR}")
+message(STATUS "Binary dir:     ${PROJECT_BINARY_DIR}")
+message(STATUS "Pro VERSION:    ${PROJECT_VERSION}")
+message(STATUS "Major VERSION:  ${PROJECT_VERSION_MAJOR}")
+message(STATUS "Minor VERSION:  ${PROJECT_VERSION_MINOR}")
+message(STATUS "Patch VERSION:  ${PROJECT_VERSION_PATCH}")
+
+add_subdirectory(ring-buffer-demo)
+add_subdirectory(glib-demo)
+add_subdirectory(dtls-demo)
