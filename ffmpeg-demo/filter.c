@@ -163,6 +163,47 @@ int main(int argc, char **argv) {
     avfilter_inout_free(&inputs);
     avfilter_inout_free(&outputs);
 
+    AVFormatContext *outFormatContext = NULL;
+    avformat_alloc_output_context2(&outFormatContext, NULL, NULL, "output.mp4");
+    AVCodec *codec = avcodec_find_encoder(AV_CODEC_ID_MPEG1VIDEO);
+
+
+    AVStream *out_stream = avformat_new_stream(outFormatContext, NULL);
+    AVCodecContext *codecContext = avcodec_alloc_context3(NULL);
+
+
+    if (codec == NULL || out_stream == NULL || NULL == codecContext) {
+        printf("%d", __LINE__);
+        return 1;
+    }
+
+    codecContext->bit_rate = 400000;
+    codecContext->width = 1280;
+    codecContext->height = 720;
+    codecContext->time_base = (AVRational){1, 25};
+    codecContext->gop_size = 10;
+    codecContext->pix_fmt = AV_PIX_FMT_YUV420P;
+
+    if (0 != avcodec_open2(codecContext, codec, NULL)) {
+        printf("%d", __LINE__);
+        return 1;
+    }
+
+    AVFrame *frame = av_frame_alloc();
+    if (NULL == frame) {
+        printf("%d", __LINE__);
+        return 1;
+    }
+
+    AVPacket *packet = av_packet_alloc();
+    if (NULL == packet) {
+        printf("%d", __LINE__);
+        return 1;
+    }
+
+
+
+
     int a = 0, b = 0;
     while (av_read_frame(avFormatContext, avPacket) >= 0) {
         if (avPacket->stream_index == videoStreamIndex) {
@@ -211,6 +252,16 @@ int main(int argc, char **argv) {
                         pgm_save(avFilteredFrame->data[0], avFilteredFrame->linesize[0],
                                  avFilteredFrame->width, avFilteredFrame->height, buf);
                     }
+
+
+                    av_init_packet(packet);
+                    if(0 == avcodec_send_frame(codecContext, avFilteredFrame)){
+                        avcodec_receive_packet(codecContext, packet);
+
+                    }else{
+                       printf("ERROR %d", __LINE__);
+                    }
+
 
                     av_frame_unref(avFilteredFrame);
                 }
