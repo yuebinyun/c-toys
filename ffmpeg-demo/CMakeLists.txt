@@ -1,3 +1,7 @@
+######################################
+## 使用 pkg-config 寻找 libav。
+######################################
+
 cmake_minimum_required(VERSION 3.13)
 project(ffmpeg_demo LANGUAGES C VERSION 1.2.7)
 
