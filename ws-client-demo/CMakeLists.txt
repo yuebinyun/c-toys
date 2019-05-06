@@ -3,7 +3,7 @@ project(ws-client)
 
 set(CMAKE_C_STANDARD 11)
 
-message("${PROJECT_SOURCE_DIR}/include/spdlog/")
+#message("${PROJECT_SOURCE_DIR}/include/spdlog/")
 
 file(GLOB spdlog_src "${PROJECT_SOURCE_DIR}/include/spdlog/*")
 

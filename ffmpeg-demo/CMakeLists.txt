@@ -1,5 +1,12 @@
 ######################################
-## 使用 pkg-config 寻找 libav。
+## 使用 pkg-config 寻找 libav*。
+
+##```bash
+## sudo add-apt-repository ppa:jonathonf/ffmpeg-4
+## sudo apt-get install libavcodec-dev
+## sudo apt-get install libavformat-dev
+## sudo apt-get install libavfilter-dev
+##```
 ######################################
 
 cmake_minimum_required(VERSION 3.13)
@@ -14,9 +21,9 @@ message(" Version:      ${PROJECT_VERSION}")
 set(CMAKE_C_STANDARD 11)
 
 find_package(PkgConfig REQUIRED)
-pkg_check_modules(LIBAV REQUIRED libavcodec libavformat libavfilter)
+pkg_check_modules(LIBAV REQUIRED libavutil libavcodec libavformat libavfilter)
 
-message(${LIBAV_LIBRARY_DIRS})
+message(" LIBAV DIR : ${LIBAV_LIBRARY_DIRS}, ${LIBAV_INCLUDE_DIRS}")
 
 link_directories(${LIBAV_LIBRARY_DIRS})
 

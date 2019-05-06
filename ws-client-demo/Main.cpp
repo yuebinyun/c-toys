@@ -57,6 +57,8 @@ int main(int args, char **argv) {
     SPDLOG_DEBUG("Welcome to spdlog version {}.{}.{} !",
                  SPDLOG_VER_MAJOR, SPDLOG_VER_MINOR, SPDLOG_VER_PATCH);
 
+    return 0;
+
 //    auto console = spdlog::stdout_logger_mt("console");
 //    auto daily_logger = spdlog::daily_logger_mt("daily_logger", "logs/daily.txt", 2, 30);
 //    spdlog::set_default_logger(daily_logger);
