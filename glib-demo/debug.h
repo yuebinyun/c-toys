@@ -14,7 +14,7 @@
 
 #include <glib.h>
 
-int janus_log_level = 7;
+int janus_log_level = 4;
 gboolean janus_log_timestamps = TRUE;
 gboolean janus_log_colors = TRUE;
 
@@ -34,21 +34,21 @@ gboolean janus_log_colors = TRUE;
  */
 ///@{
 /*! \brief No debugging */
-#define LOG_NONE     (0)
+#define LOG_NONE     (0u)
 /*! \brief Fatal error */
-#define LOG_FATAL    (1)
+#define LOG_FATAL    (1u)
 /*! \brief Non-fatal error */
-#define LOG_ERR      (2)
+#define LOG_ERR      (2u)
 /*! \brief Warning */
-#define LOG_WARN     (3)
+#define LOG_WARN     (3u)
 /*! \brief Informational message */
-#define LOG_INFO     (4)
+#define LOG_INFO     (4u)
 /*! \brief Verbose message */
 #define LOG_VERB     (5)
 /*! \brief Overly verbose message */
 #define LOG_HUGE     (6)
 /*! \brief Debug message (includes .c filename, function and line number) */
-#define LOG_DBG      (7)
+#define LOG_DBG      (7u)
 /*! \brief Maximum level of debugging */
 #define LOG_MAX LOG_DBG
 
@@ -93,7 +93,7 @@ do { \
 			time_t janusltime = time(NULL); \
 			localtime_r(&janusltime, &janustmresult); \
 			strftime(janus_log_ts, sizeof(janus_log_ts), \
-			         "[%a %b %e %T %Y] ", &janustmresult); \
+			         "[%Y-%m-%d %X] ", &janustmresult); \
 		} \
 		if (level == LOG_FATAL || level == LOG_ERR || level == LOG_DBG) { \
 			printf("[%s:%s:%d] ", __FILE__, __FUNCTION__, __LINE__); \
