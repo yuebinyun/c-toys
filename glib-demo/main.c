@@ -5,6 +5,12 @@
 //#include <gio/gtask.h>
 #include "debug.h"
 
+typedef struct {
+    GSource parent;
+    GAsyncQueue *queue;
+    GDestroyNotify  destroy_message;
+};
+
 void testGList();
 
 gboolean cb(gpointer user_data) {
@@ -34,6 +40,14 @@ static void *fun(void *user_data) {
 }
 
 int main() {
+
+    int a = 9527;
+    int *b = &a;  // 声明，初始化
+    int ref = a;
+    *b = 9526;
+
+    g_print("a = %d\n", a);
+    exit(0);
 
     GThread *thread = g_thread_try_new("new-thread", fun, "data", NULL);
 
