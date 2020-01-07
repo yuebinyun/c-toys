@@ -3,7 +3,7 @@
 #include <gio/gio.h>
 #include <glib-object.h>
 //#include <gio/gtask.h>
-#include "debug.h"
+#include "../debug.h"
 
 typedef struct {
     GSource parent;
